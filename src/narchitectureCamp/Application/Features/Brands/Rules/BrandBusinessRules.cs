@@ -4,6 +4,7 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
+using Application.Features.Brands.Commands.Create;
 
 namespace Application.Features.Brands.Rules;
 
@@ -39,4 +40,17 @@ public class BrandBusinessRules : BaseBusinessRules
         );
         await BrandShouldExistWhenSelected(brand);
     }
+
+    //Ekleme yapýlýrken marka ismi tekrar edilemez
+    public async Task BrandNameCannotBeDuplicatedWhenInserted(string name)
+    {
+        Brand? result = await _brandRepository.GetAsync(predicate: b => b.Name.ToLower() == name.ToLower());
+
+        if (result != null)
+        {
+            throw new BusinessException("Brand Name Exists");
+            
+        }
+    }
+    //throw new BusinessException(BrandsBusinessMessages.BrandNameExists);
 }
