@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NArchitecture.Core.Security.Constants;
 using Application.Features.Brands.Constants;
 using Application.Features.Models.Constants;
+using Application.Features.Fuels.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -123,6 +124,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ModelsOperationClaims.Create },
                 new() { Id = ++lastId, Name = ModelsOperationClaims.Update },
                 new() { Id = ++lastId, Name = ModelsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Fuels
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = FuelsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = FuelsOperationClaims.Read },
+                new() { Id = ++lastId, Name = FuelsOperationClaims.Write },
+                new() { Id = ++lastId, Name = FuelsOperationClaims.Create },
+                new() { Id = ++lastId, Name = FuelsOperationClaims.Update },
+                new() { Id = ++lastId, Name = FuelsOperationClaims.Delete },
             ]
         );
         #endregion
